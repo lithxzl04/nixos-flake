@@ -14,7 +14,15 @@
 
     nixosConfigurations."3301-nix" = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      modules = [ ./configuration.nix ];
+      modules = [
+        ./configuration.nix
+        {
+          environment.systemPackages = [
+            inputs.hermes-agent.packages.x86_64-linux.default
+          ];
+        }
+      ];
     };
   };
 }
+

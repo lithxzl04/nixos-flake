@@ -2,7 +2,7 @@
 
 {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware-configuration.nix
     ./modules/desktop.nix
     ./modules/gaming.nix
     ./modules/memory.nix
@@ -36,7 +36,7 @@
   users.users.lith = {
     isNormalUser = true;
     description = "lith";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd"  ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
@@ -66,6 +66,8 @@
   # Services
   services.openssh.enable = true;
   services.flatpak.enable = true;
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   # Do not change after install; see `man configuration.nix`.
   system.stateVersion = "26.05";
